@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt">
+ <head>
+    <meta charset="UTF-8" />
+        <title>Exemplo Var</title>
+</head>
+<body>
+    <h1>JavaScript Variables</h1>
+
+   <p id="preco"></p>
+   <p id="precoDesconto"></p>
+
+   <script>
+     var desconto=20;
+     preco=100;
+     function calcularDesconto(){
+        preco=preco-desconto;
+        return preco;
+     }   
+    
+     precodesconto=calcularDesconto();
+
+     console.log(preco);
+     document.getElementById("preco").innerHTML = "O preço é: " + preco;
+     document.getElementById("precoDesconto").innerHTML ="O preço com desconto é: " + precodesconto;
+  </script>
+</body>
+</html>

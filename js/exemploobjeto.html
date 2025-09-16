@@ -1,0 +1,26 @@
+<html>
+    <body>
+        <h1>JavaScript Class Methods</h1>
+
+        <p id="demo"></p>
+
+        <script>
+            class Car{
+                constructor(name, year){
+                    this.name = name;
+                    this.year = year;
+                }
+                
+                age(){
+                    const date = new Date();
+                    return date.getFullYear() - this.year;
+                }
+            }
+
+            const myCar = new Car("Ka", 2019);
+            document.getElementById("demo").innerHTML = "My car is " + myCar.age() + " years old.";
+
+            console.log(typeof(myCar))
+        </script>
+    </body>
+</html>
