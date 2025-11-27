@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login com Sessão</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <link rel="stylesheet" href="css/session.css">
+  
+</head>
+<body>
+  <div id="app" class="container">
+    <h2>Login com Sessão</h2>
+
+    <form action="LoginServlet" method="post">
+      <label for="usuario">Usuário:</label>
+      <input type="text" id="usuario" name="usuario" v-model="usuario" required>
+
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" name="senha" v-model="senha" required>
+
+      <button type="submit">Entrar</button>
+    </form>
+
+    <p class="msg" v-if="mensagem" :class="{erro: erro}">{{ mensagem }}</p>
+  </div>
+
+  <script src="js/session.js" defer></script>
+</body>
+</html>

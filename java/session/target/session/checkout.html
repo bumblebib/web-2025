@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <link rel="stylesheet" href="css/session.css">
+ 
+</head>
+<body>
+  <div id="app" class="container">
+    <h2>Área de Checkout</h2>
+
+    <div v-if="logado">
+      <p>Bem-vindo novamente, {{ nomeUsuario }}!</p>
+      <p>ID da sessão: {{ sessionId }}</p>
+
+      <form action="LogoutServlet" method="get">
+        <button type="submit">Sair</button>
+      </form>
+    </div>
+
+    <div v-else>
+      <p class="msg erro">Acesso negado. Faça login primeiro.</p>
+      <a href="index.html">Voltar ao login</a>
+    </div>
+  </div>
+
+   <script src="js/session.js" defer></script>
+</body>
+</html>

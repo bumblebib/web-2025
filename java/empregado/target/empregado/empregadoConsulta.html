@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Consulta de Empregados por País</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+ 
+  <link rel="stylesheet" href="css/empregado.css">
+</head>
+
+<body>
+  <div id="app" class="container">
+    <h2>Consulta de Empregados por País</h2>
+
+    <!-- Seleção do país -->
+    <label for="pais">Selecione o país:</label>
+    <select id="pais" v-model="paisSelecionado">
+      <option disabled value="">-- Escolha um país --</option>
+      <option v-for="pais in paises" :key="pais" :value="pais">{{ pais }}</option>
+    </select>
+
+    <button @click="consultarPorPais" :disabled="!paisSelecionado">Consultar</button>
+
+    <!-- Mensagem de status -->
+    <div v-if="mensagem" class="msg" :class="{ success: sucesso, error: !sucesso }">
+      {{ mensagem }}
+    </div>
+
+    <!-- Tabela de resultados -->
+    <table v-if="empregados.length > 0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Sobrenome</th>
+          <th>Usuário</th>
+          <th>Email</th>
+          <th>Telefone</th>
+          <th>País</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="e in empregados" :key="e.id">
+          <td>{{ e.id }}</td>
+          <td>{{ e.firstName }}</td>
+          <td>{{ e.lastName }}</td>
+          <td>{{ e.username }}</td>
+          <td>{{ e.email }}</td>
+          <td>{{ e.phone }}</td>
+          <td>{{ e.country }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p v-if="empregados.length === 0 && consultaFeita">Nenhum empregado encontrado para este país.</p>
+  </div>
+
+  <script src="js/empregado.js"></script>
+</body>
+</html>

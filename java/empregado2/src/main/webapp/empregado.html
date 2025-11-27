@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Empregados</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+<div id="app">
+  <h2>Cadastrar Empregado</h2>
+  <form @submit.prevent="salvar">
+    <input v-model="novo.firstName" placeholder="Primeiro Nome">
+    <input v-model="novo.lastName" placeholder="Sobrenome">
+    <input v-model="novo.username" placeholder="Usuário">
+    <input v-model="novo.pass" type="password" placeholder="Senha">
+    <input v-model="novo.email" placeholder="Email">
+    <input v-model="novo.phone" placeholder="Telefone">
+    <input v-model="novo.country" placeholder="País">
+    <button type="submit">Salvar</button>
+  </form>
+
+  
+</div>
+
+
+<script src="js/empregado.js"></script>
+</body>
+</html>
+

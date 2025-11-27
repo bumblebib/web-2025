@@ -6,6 +6,7 @@
         <meta charset="UTF-8">
 
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="ajax.js" defer></script>
     </head>
 
     <body>
@@ -29,15 +30,18 @@
         <section class="container">
             <article>
                 <h1>Login</h1>
-                <form action="RealizarLogin" method="post">
+                <form>
                     <p><label for="login">Username:</label>
                         <input type="text" id="login" name="username"></p>
 
                     <p><label for="senha">Password:</label>
                         <input type="password" id="senha" name="password"></p>
 
-                    <p><input type="submit" value="Log in"></p>
+                    <p><input type="submit" value="Log in" id="btnEnviar"></p>
+
+                    <div id="mensagem"></div>
                 </form>
+
             </article>
             <!--article: conteúdo "self-contained", independente do resto do site -->
             <!--form: é um container para elementros de entradas (inputs)-->

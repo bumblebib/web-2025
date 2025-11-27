@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login com Vue.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <link rel="stylesheet" href="css/login.css">
+  
+</head>
+<body>
+  <div id="app" class="container">
+    <h2>Login</h2>
+
+    <div v-if="!logado">
+      <label>Usuário:</label>
+      <input type="text" v-model="usuario" placeholder="Digite o usuário">
+
+      <label>Senha:</label>
+      <input type="password" v-model="senha" placeholder="Digite a senha">
+
+      <button @click="fazerLogin">Entrar</button>
+    </div>
+
+    <div v-else>
+      <h3>Bem-vindo, {{ nomeUsuario }}!</h3>
+      <button @click="logout">Sair</button>
+    </div>
+
+    <p class="msg" :class="{erro: erro}">{{ mensagem }}</p>
+  </div>
+
+  <script src="js/login.js" defer></script>
+</body>
+</html>

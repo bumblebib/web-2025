@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Área do Usuário</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <link rel="stylesheet" href="css/session.css">
+
+</head>
+<body>
+  <div id="app" class="container">
+    <h2>Bem-vindo, {{ nomeUsuario }}</h2>
+
+    <p>ID da sessão: {{ sessionId }}</p>
+
+    <form action="LogoutServlet" method="get">
+      <button type="submit">Sair</button>
+    </form>
+
+    <form action="checkout.html" method="get">
+      <button type="submit">Ir para Checkout</button>
+    </form>
+  </div>
+
+    <script src="js/session.js" defer></script>
+</body>
+</html>

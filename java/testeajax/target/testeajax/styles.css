@@ -1,0 +1,15 @@
+body{
+    font-family: Arial, sans-serif;
+    margin: 40px;
+}
+
+input, button { 
+    padding: 6px; 
+    font-size: 16px;
+}
+
+#resposta{
+    margin-top: 20px;
+    color: darkblue;
+    font-weight: bold;
+}
