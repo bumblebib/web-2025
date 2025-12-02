@@ -3,14 +3,14 @@ package service;
 import java.util.List;
 
 import model.Mesa;
-import database.MesaDAOMock;
+import database.MesaDAO;
 
 public class MesaService {
 
-    private final MesaDAOMock mesaDAO;
+    private final MesaDAO mesaDAO;
 
     public MesaService() {
-        this.mesaDAO = new MesaDAOMock();
+        this.mesaDAO = new MesaDAO();
     }
 
     public List<Mesa> listar() {
@@ -54,5 +54,14 @@ public class MesaService {
             }
         }
         return count;
+    }
+
+    public boolean atualizarDisponibilidade(boolean disponivel, Mesa mesa) {
+        mesa.setDisponivel(disponivel);
+        if (disponivel) {
+            return mesaDAO.setDisponivel(mesa.getNumero());
+        } else {
+            return mesaDAO.setIndisponivel(mesa.getNumero());
+        }
     }
 }

@@ -13,7 +13,7 @@ import java.util.List;
 
 import service.ReservaService;
 import util.LocalDateTimeAdapter;
-import database.ReservaDAOMock;
+import database.ReservaDAO;
 
 @WebServlet("/api/reservas")
 public class ReservaServlet extends HttpServlet {
@@ -26,7 +26,7 @@ public class ReservaServlet extends HttpServlet {
 
     @Override
     public void init() {
-        ReservaDAOMock reservaDAO = new ReservaDAOMock();
+        ReservaDAO reservaDAO = new ReservaDAO();
 
         reservaService = new ReservaService(reservaDAO);
     }

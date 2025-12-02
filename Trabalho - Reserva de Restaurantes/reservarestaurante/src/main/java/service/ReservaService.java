@@ -3,26 +3,26 @@ package service;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import database.ReservaDAOMock;
+import database.ReservaDAO;
 import model.Mesa;
 import model.Reserva;
 
 public class ReservaService {
 
     private MesaService mesaService;
-    private final ReservaDAOMock reservaDAO;
+    private ReservaDAO reservaDAO;
 
-    public ReservaService(ReservaDAOMock reservaDAO) {
+    public ReservaService(ReservaDAO reservaDAO) {
         this.reservaDAO = reservaDAO;
         this.mesaService = new MesaService();
     }
 
     public List<Reserva> listarReservas() {
-        return reservaDAO.listar();
+        return reservaDAO.listarReservas();
     }
 
     private boolean haConflito(int numeroMesa, LocalDateTime inicio, LocalDateTime fim) {
-        for (Reserva reserva : reservaDAO.listar()) {
+        for (Reserva reserva : reservaDAO.listarReservas()) {
             if (reserva.getNumeroMesa() == numeroMesa) {
                 if (inicio.isBefore(reserva.getFim()) && fim.isAfter(reserva.getInicio())) {
                     return true;
@@ -31,6 +31,45 @@ public class ReservaService {
         }
         return false;
     }
+
+    public boolean liberarReserva(int reservaId) {
+
+        Reserva r = reservaDAO.buscarPorId(reservaId);
+        if (r == null) return false;
+
+        Mesa mesa = mesaService.buscarMesa(r.getNumeroMesa());
+        if (mesa != null) {
+            mesaService.atualizarDisponibilidade(true, mesa);
+        }
+
+        return reservaDAO.remover(reservaId);
+    }
+
+    public void expirarReservas() {
+        LocalDateTime agora = LocalDateTime.now();
+
+        for (Reserva r : reservaDAO.listarReservas()) {
+            if (agora.isAfter(r.getFim())) {
+                liberarReserva(r.getId());
+                reservaDAO.remover(r.getId());
+            }
+        }
+    }
+
+
+    public void reservarMesa(MesaService mesa){
+        this.mesaService = mesa;
+        LocalDateTime agora = LocalDateTime.now();
+
+        for (Reserva r : reservaDAO.listarReservas()) {
+            if(agora.isAfter(r.getInicio()) && agora.isBefore(r.getFim())){ 
+                Mesa mesaAtual = mesaService.buscarMesa(r.getNumeroMesa());
+                if (mesaAtual != null) mesaService.atualizarDisponibilidade(false, mesaAtual);
+            }
+        }
+    }
+ 
+
 
     public boolean reservarMesa(int numeroMesa, String responsavel, LocalDateTime inicio, LocalDateTime fim) {
 
@@ -51,34 +90,8 @@ public class ReservaService {
         reservaDAO.inserir(reserva);
 
         // 6. Atualizar disponibilidade
-        mesa.setDisponivel(false);
+        reservarMesa(mesaService);
 
         return true;
-    }
-
-    public boolean liberarReserva(int reservaId) {
-
-        Reserva r = reservaDAO.buscarPorId(reservaId);
-        if (r == null) return false;
-
-        Mesa mesa = mesaService.buscarMesa(r.getNumeroMesa());
-        if (mesa != null) {
-            mesa.setDisponivel(true);
-        }
-
-        return reservaDAO.remover(reservaId);
-    }
-
-    public void expirarReservas() {
-        LocalDateTime agora = LocalDateTime.now();
-
-        for (Reserva r : reservaDAO.listar()) {
-            if (!r.getFim().isAfter(agora)) {
-                Mesa mesa = mesaService.buscarMesa(r.getNumeroMesa());
-                if (mesa != null) mesa.setDisponivel(true);
-
-                reservaDAO.remover(r.getId());
-            }
-        }
     }
 }
