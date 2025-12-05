@@ -25,11 +25,19 @@ public class MesaServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
-        List<Mesa> mesas = mesaService.listar();
+        String dispo = req.getParameter("disponivel");
+        List<Mesa> mesas;
+
+        if ("true".equalsIgnoreCase(dispo)) {
+            mesas = mesaService.listarDisponiveis();
+        } else {
+            mesas = mesaService.listar();
+        }
 
         String json = gson.toJson(mesas);
         resp.getWriter().write(json);
     }
+
 } 
 
 

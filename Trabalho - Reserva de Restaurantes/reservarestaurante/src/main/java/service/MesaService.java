@@ -36,6 +36,10 @@ public class MesaService {
         return count;
     }
 
+    public List<Mesa> listarDisponiveis() {
+        return mesaDAO.listarDisponiveis();
+    }
+
     public int mesasPorCapacidade(int capacidade) {
         int count = 0;
         for (Mesa mesa : mesaDAO.listar()) {
