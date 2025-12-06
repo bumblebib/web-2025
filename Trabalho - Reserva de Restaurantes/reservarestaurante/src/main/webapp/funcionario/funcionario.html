@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Painel do Funcionário</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <h1>Painel do Funcionário</h1>
+    <h2>Status das Mesas</h2>
+
+    <!-- Grade onde o JS irá colocar os cards das mesas -->
+    <div id="listaMesas" class="grid"></div>
+
+    <script src="js/funcionarioAjax.js"></script>
+    <script>
+        BuscarMesa();
+    </script>
+
+</body>
+</html>

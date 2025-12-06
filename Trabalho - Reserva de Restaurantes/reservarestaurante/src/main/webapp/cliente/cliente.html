@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Reserva de Mesas</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <h1>Mesas Disponíveis</h1>
+
+    <!-- onde o JS vai colocar a lista de mesas (grid) -->
+    <div id="lista-mesas" class="grid"></div>
+
+    <h2>Fazer Reserva</h2>
+
+    <div id="form-reserva">
+
+        <label>Mesa disponível:</label>
+        <select id="inputMesa"></select>
+
+        <label>Nome:</label>
+        <input type="text" id="inputNome">
+
+        <label>Início:</label>
+        <input type="datetime-local" id="inputInicio">
+
+        <label>Fim:</label>
+        <input type="datetime-local" id="inputFim">
+
+        <button onclick="Enviar_Reserva()">Reservar</button>
+    </div>
+
+    <script src="js/clienteAjax.js"></script>
+    <script>
+        BuscarMesa();
+    </script>
+
+</body>
+</html>
