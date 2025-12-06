@@ -1,3 +1,4 @@
+//Ajax com uso do Vue para Cliente
 const { createApp } = Vue;
 
 createApp({

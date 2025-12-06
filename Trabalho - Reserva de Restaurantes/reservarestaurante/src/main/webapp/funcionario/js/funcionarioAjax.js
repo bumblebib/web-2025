@@ -1,3 +1,4 @@
+//Ajax com uso do Vue para Funcionario
 const { createApp } = Vue;
 
 createApp({
