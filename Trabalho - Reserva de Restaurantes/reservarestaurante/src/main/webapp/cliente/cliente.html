@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <title>Reserva de Mesas</title>
 
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
@@ -14,14 +12,15 @@
 
     <h1>Mesas Disponíveis</h1>
 
-    <!-- onde o js vai colocar as mesas -->
+    <!-- onde o JS vai colocar a lista de mesas (grid) -->
     <div id="lista-mesas" class="grid"></div>
 
     <h2>Fazer Reserva</h2>
+
     <div id="form-reserva">
 
-        <label>Mesa:</label>
-        <input type="number" id="inputMesa">
+        <label>Mesa disponível:</label>
+        <select id="inputMesa"></select>
 
         <label>Nome:</label>
         <input type="text" id="inputNome">
@@ -35,7 +34,7 @@
         <button onclick="Enviar_Reserva()">Reservar</button>
     </div>
 
-    <script src="clienteAjax.js"></script>
+    <script src="js/clienteAjax.js"></script>
     <script>
         BuscarMesa();
     </script>
