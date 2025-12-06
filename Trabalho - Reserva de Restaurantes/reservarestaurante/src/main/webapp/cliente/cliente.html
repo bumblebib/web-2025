@@ -9,35 +9,40 @@
 </head>
 
 <body>
+    <div id="layout">
 
-    <h1>Mesas Disponíveis</h1>
+        <!-- parte esquerda: mesas -->
+        <div id="lado-esquerdo">
+            <h1>Mesas Disponíveis</h1>
+            <div id="lista-mesas" class="grid"></div>
+        </div>
 
-    <!-- onde o JS vai colocar a lista de mesas (grid) -->
-    <div id="lista-mesas" class="grid"></div>
+        <!-- parte direita: formulário de reservas -->
+        <div id="lado-direito">
+            <h2>Fazer Reserva</h2>
 
-    <h2>Fazer Reserva</h2>
+            <div id="form-reserva">
 
-    <div id="form-reserva">
+                <label>Mesa disponível:</label>
+                <select id="inputMesa"></select>
 
-        <label>Mesa disponível:</label>
-        <select id="inputMesa"></select>
+                <label>Nome:</label>
+                <input type="text" id="inputNome">
 
-        <label>Nome:</label>
-        <input type="text" id="inputNome">
+                <label>Início:</label>
+                <input type="datetime-local" id="inputInicio">
 
-        <label>Início:</label>
-        <input type="datetime-local" id="inputInicio">
+                <label>Fim:</label>
+                <input type="datetime-local" id="inputFim">
 
-        <label>Fim:</label>
-        <input type="datetime-local" id="inputFim">
-
-        <button onclick="Enviar_Reserva()">Reservar</button>
+                <button onclick="Enviar_Reserva()">Reservar</button>
+            </div>
+        </div>
     </div>
 
     <script src="js/clienteAjax.js"></script>
     <script>
         BuscarMesa();
     </script>
-
 </body>
 </html>
