@@ -1,48 +1,85 @@
-//Função que busca as mesas 
-function BuscarMesa() {
-    // requisição Get para o backend
-    fetch('/api/mesas')
-    .then(Response =>Response.json())
-    .then(dados => {
-        Atualizar_Mesas(dados);
-    })
-    .catch(err => {
-        console.error("Erro ao buscar as mesas:", err)
-    });
-}
+const { createApp } = Vue;
 
-//Função que atualiza a interface com os dados recebidos, mostra as mesas livres 
-function Atualizar_Mesas(MesasDisponiveis){
- //Atualizar essa função depois que tiver o HTML
-    console.log(MesasDisponiveis);
-}
+createApp({
+    data(){
+        return{
+        //Variaveis, todas iguais ao model para Mesa
+         mesas: [],  
+         reserva: {
+            numeroMesa: null,
+            nomeCliente: "",
+            inicio: "",
+            fim: ""
+         } 
+        };
+    },
 
-//Função que envia a reserva 
-function Enviar_Reserva(){
-    fetch('/api/reservas',{
-    method: 'POST', // POST signica que está sendo enviado
-    headers: {
-            'Content-type': 'application/json' // informa qual tipo dos dados
-    }, 
-        body: JSON.stringify(reserva) //Transforma em uma string 
-})
-    .then(Response =>Response.json())
-    .then(dados => {
-        Resposta_Servidor(dados);
-    })
-    .catch(err => {
-        console.error("Erro ao enviar a reserva:", err)
-    });
-}
+    //Computed = vai ser usado para filtrar se as mesas estao disponiveis (Cliente só ve mesas disponiveis)
+    computed:{
+        mesasDisponiveis(){
+            return this.mesas.filter(mesa => mesa.disponivel === true);
+        }
+    },
 
-//Função que pega dados dos inputs (mesa, nome, horário) PRECISO DO HTML    
+    //Funçoes são colocadas como metodos
+    methods:{
 
-//Função que trata a resposta do servidor (sucesso ou erro)
-function Resposta_Servidor(resposta){
-    if(resposta.sucesso){
-        console.log("Reserva realizada!");
-        BuscarMesa(); // atualiza as mesas disponiveis
-    } else {
-        console.error("Erro na reserva:", resposta.mensagem);
+        //Função que busca as mesas 
+        async buscarMesa(){
+          try{
+            const response = await fetch('/api/mesas');
+            const dados = await response.json();
+            this.mesas = dados; // Mesmo que Atualizar_Mesas(dados);
+          } catch (err) {
+             console.error("Erro ao buscar as mesas:", err);
+          } 
+
+        },
+
+        //Função que envia a reserva
+        async enviarReserva(){
+          try{
+            const response = await fetch('/api/reservas', {
+                method: 'POST', // POST signica que está sendo enviado
+                headers: {
+                    'Content-type': 'application/json' // informa qual tipo dos dados
+                }, 
+                body: JSON.stringify(this.reserva) //Transforma em uma string 
+            });
+
+            const dados = await response.json();
+            console.log("Resposta do servidor:", dados);
+            this.respostaServidor(dados);
+            } catch (err){
+                 console.error("Erro ao enviar a reserva:", err);
+            }
+         },
+
+         //Função que trata a resposta do servidor (sucesso ou erro)
+         respostaServidor(resposta){
+            if(resposta.sucesso){
+                console.log("Reserva realizada!");
+                this.limpar();
+                this.buscarMesa(); // atualiza as mesas disponiveis
+            } else {
+                console.error("Erro na reserva:", resposta.mensagem);
+            }
+        },
+
+        //Função para limpar o formulário usado, podemos tirar se não for necessaria
+        limpar(){
+            this.reserva = {
+            numeroMesa: null,
+            nomeCliente: "",
+            inicio: "",
+            fim: ""
+         };
+        }
+    },
+        
+    //Função que carrega todas as informações, podemos tirar se não for necessaria
+    mounted(){
+        this.buscarMesa();
     }
-}
+
+}).mount("#app")
