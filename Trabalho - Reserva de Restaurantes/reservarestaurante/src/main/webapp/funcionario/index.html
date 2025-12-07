@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Painel do Funcionário</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- ADICIONAR Vue -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Painel do Funcionário</h1>
+        <h2>Status das Mesas</h2>
+        
+        <!-- Mensagem de erro -->
+        <p v-if="erro" style="color: rgb(248, 60, 60); font-weight: bold;" class="mensagem">
+            {{ erro }}
+        </p>
+
+        <!-- Mensagem de sucesso -->
+        <p v-if="sucesso" style="color: rgb(74, 177, 74); font-weight: bold;" class="mensagem">
+            {{ sucesso }}
+        </p>
+
+        <div id="lista-mesas" class="grid">
+
+            <!-- EXIBIR TODAS AS MESAS -->
+            <div v-for="mesa in mesas" :key="mesa.numero" class="mesa-card" 
+            :class="mesa.reserva ? 'reservada' : 'livre'">
+
+                <p class="mesa-numero"><strong>Mesa {{ mesa.numero }}</strong></p>
+
+                <!-- SE MESA ESTÁ RESERVADA -->
+                <div v-if="mesa.reserva">
+                    <p class="nomeCliente">Reservado por:</p>
+                    <p class="nomeCliente-valor">{{ mesa.reserva.nomeCliente }}</p>
+
+                    <p class="data-reserva">Data: {{ mesa.reserva.data }}</p>
+
+                    <button class="btn-cancelar" @click="cancelarReserva(mesa.reserva.id)">
+                        Cancelar Reserva
+                    </button>
+                </div>
+
+                <!-- SE MESA ESTÁ DISPONÍVEL -->
+                <div v-else>
+                    <p class="livre">Mesa disponível</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/funcionario.js"></script>
+</body>
+</html>

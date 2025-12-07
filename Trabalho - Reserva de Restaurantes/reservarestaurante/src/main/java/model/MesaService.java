@@ -25,38 +25,8 @@ public class MesaService {
         return null;
     }
 
-    public int mesasDisponiveis() {
-        int count = 0;
-        for (Mesa mesa : mesaDAO.listar()) {
-            if (mesa.isDisponivel()) {
-                count++;
-            }
-        }
-        return count;
-    }
-
     public List<Mesa> listarDisponiveis() {
         return mesaDAO.listarDisponiveis();
-    }
-
-    public int mesasPorCapacidade(int capacidade) {
-        int count = 0;
-        for (Mesa mesa : mesaDAO.listar()) {
-            if (mesa.isDisponivel() && mesa.getCapacidade() == capacidade) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    public int mesasNaoDisponiveis() {
-        int count = 0;
-        for (Mesa mesa : mesaDAO.listar()) {
-            if (!mesa.isDisponivel()) {
-                count++;
-            }
-        }
-        return count;
     }
 
     public boolean atualizarDisponibilidade(boolean disponivel, Mesa mesa) {

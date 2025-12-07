@@ -33,7 +33,7 @@ h1, h2 {
 .grid {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 2fr);
     gap: 20px;
     margin-bottom: 40px;
 }
@@ -44,7 +44,6 @@ h1, h2 {
     border-radius: 10px;
     border: 2px solid #ddd;
     text-align: center;
-    width: 150px;
 }
 
 button {
@@ -102,4 +101,17 @@ button:hover {
     padding: 10px;
     border-radius: 6px;
     text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
+.mesa-highlight {
+    animation: highlightFade 3s ease-out;
+    background-color: #c4f2c4 !important; /* verde suave */
+    border: 2px solid #4CAF50;
+}
+
+@keyframes highlightFade {
+    0%   { background-color: #77ff77; }
+    100% { background-color: #ffffff; }
 }

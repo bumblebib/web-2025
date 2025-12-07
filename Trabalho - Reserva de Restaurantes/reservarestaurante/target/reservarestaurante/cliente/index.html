@@ -21,7 +21,8 @@
 
                 <!-- Aqui só coloquei o v-for, mantendo a DIV original -->
                 <div id="lista-mesas" class="grid">
-                    <div v-for="mesa in mesasDisponiveis" :key="mesa.numero" class="mesa-card">
+                    <div v-for="mesa in mesas" :key="mesa.numero" class="mesa-card" 
+                    :class="{ 'mesa-highlight': mesasDestaque.has(mesa.numero) }">
                         <p class="mesa-numero"><strong>Mesa {{ mesa.numero }}</strong></p>
                         <p class="capacidade">Capacidade:</p>
                         <p class="capacidade-valor">{{ mesa.capacidade }} lugares</p>
@@ -39,7 +40,7 @@
                     <label>Mesa disponível:</label>
                     <select id="inputMesa" v-model="reserva.numeroMesa">
                         <option disabled value="">Selecione</option>
-                        <option v-for="mesa in mesasDisponiveis" :value="mesa.numero">
+                        <option v-for="mesa in mesas" :value="mesa.numero">
                             Mesa {{ mesa.numero }} - {{ mesa.capacidade }} lugares
                         </option>
                     </select>
@@ -68,7 +69,7 @@
     </div>
 
     <!-- SEU JS -->
-    <script src="js/clienteAjax.js"></script>
+    <script src="js/cliente.js"></script>
 
 </body>
 </html>

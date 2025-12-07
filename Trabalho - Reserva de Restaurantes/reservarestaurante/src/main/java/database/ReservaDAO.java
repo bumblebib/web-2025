@@ -14,7 +14,7 @@ public class ReservaDAO {
     public List<Reserva> listarReservas() {
         List<Reserva> reservas = new ArrayList<>();
 
-        String sql = "SELECT * FROM Reserva";
+        String sql = "SELECT * FROM Reserva WHERE status = 'ATIVA'";
 
         try (Connection conn = ConnectionFactory.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
